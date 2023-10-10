@@ -1,0 +1,45 @@
+services:
+  nginx:
+    build:
+      dockerfile: dockerfiles/nginx.Dockerfile
+    container_name: nginx
+    volumes:
+      - ./nginx/wwwlogs:/home/wwwlogs
+      - ./nginx/logs:/usr/local/nginx/logs
+      - ./www:/home/www
+      - ./wwwroot:/home/wwwroot
+      - ./nginx/conf:/etc/nginx
+    ports:
+      - 80:80
+      - 443:443
+
+    restart: unless-stopped
+
+  php-fpm:
+    build:
+      dockerfile: dockerfiles/php-fpm.Dockerfile
+    container_name: php-fpm
+    volumes:
+      - ./php/etc:/usr/local/etc
+      - ./php/var:/usr/local/php-fpm/var
+      - ./php/var:/usr/local/php/var
+      - ./www:/home/www
+      - ./wwwroot:/home/wwwroot
+
+    restart: unless-stopped
+
+  mysql:
+    container_name: mysql
+    image: mysql:8
+    # NOTE: use of "mysql_native_password" is not recommended: https://dev.mysql.com/doc/refman/8.0/en/upgrading-from-previous-series.html#upgrade-caching-sha2-pas>    # (this is just an example, not intended to be a production configuration)
+    command: --default-authentication-plugin=mysql_native_password
+    user: "1000:1000"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_HOST: '%'
+    volumes:
+      - ./mysql/conf.d:/etc/mysql/conf.d
+      - ./mysql/mysql:/var/lib/mysql
+    ports:
+      - "127.0.0.1:3306:3306"
+    restart: unless-stopped
