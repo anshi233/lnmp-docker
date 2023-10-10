@@ -20,8 +20,8 @@ services:
       dockerfile: dockerfiles/php-fpm.Dockerfile
     container_name: php-fpm
     volumes:
-      - ./php/etc:/usr/local/etc
-      - ./php/var:/usr/local/php-fpm/var
+      - ./php/etc/php-fpm.conf:/usr/local/etc/php-fpm.conf:ro
+      - ./php/etc/php.ini:/usr/local/etc/php/php.ini:ro
       - ./php/var:/usr/local/php/var
       - ./www:/home/www
       - ./wwwroot:/home/wwwroot
@@ -33,13 +33,11 @@ services:
     image: mysql:8
     # NOTE: use of "mysql_native_password" is not recommended: https://dev.mysql.com/doc/refman/8.0/en/upgrading-from-previous-series.html#upgrade-caching-sha2-pas>    # (this is just an example, not intended to be a production configuration)
     command: --default-authentication-plugin=mysql_native_password
-    user: "1000:1000"
+    user: "1002:1002"
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_ROOT_HOST: '%'
     volumes:
       - ./mysql/conf.d:/etc/mysql/conf.d
       - ./mysql/mysql:/var/lib/mysql
-    ports:
-      - "127.0.0.1:3306:3306"
     restart: unless-stopped
