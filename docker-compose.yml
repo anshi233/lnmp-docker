@@ -1,3 +1,4 @@
+
 services:
   nginx:
     build:
@@ -9,6 +10,7 @@ services:
       - ./www:/home/www
       - ./wwwroot:/home/wwwroot
       - ./nginx/conf:/etc/nginx
+      - ./ssl:/ssl
     ports:
       - 80:80
       - 443:443
@@ -33,9 +35,10 @@ services:
     image: mysql:8
     # NOTE: use of "mysql_native_password" is not recommended: https://dev.mysql.com/doc/refman/8.0/en/upgrading-from-previous-series.html#upgrade-caching-sha2-pas>    # (this is just an example, not intended to be a production configuration)
     command: --default-authentication-plugin=mysql_native_password
+    # Please change the user id to the acutal user id you want mysql to use
     user: "1002:1002"
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: CHANGE_TO_YOUR_PASSWORD
       MYSQL_ROOT_HOST: '%'
     volumes:
       - ./mysql/conf.d:/etc/mysql/conf.d
