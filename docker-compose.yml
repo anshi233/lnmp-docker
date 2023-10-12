@@ -4,6 +4,7 @@ services:
     build:
       dockerfile: dockerfiles/nginx.Dockerfile
     container_name: nginx
+    user: "1001:1001"
     volumes:
       - ./nginx/wwwlogs:/home/wwwlogs
       - ./nginx/logs:/usr/local/nginx/logs
@@ -20,6 +21,7 @@ services:
   php-fpm:
     build:
       dockerfile: dockerfiles/php-fpm.Dockerfile
+    user: "1001:1001"
     container_name: php-fpm
     volumes:
       - ./php/etc/php-fpm.conf:/usr/local/etc/php-fpm.conf:ro
