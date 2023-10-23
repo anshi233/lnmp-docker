@@ -2,7 +2,7 @@
 [ENGLISH](#ENGLISH)
 # 中文
 ## 简介
-有一个使用docker实现lnmp.org的docker-compose项目，所有的配置文件都来自lnmp.org的LNMP2.0安装脚本。
+又一个使用docker实现lnmp.org的docker-compose项目，所有的配置文件都来自lnmp.org的LNMP2.0安装脚本。
 强烈推荐使用自己的配置文件替换掉原有的配置文件。
 ## 文件列表
 ```
