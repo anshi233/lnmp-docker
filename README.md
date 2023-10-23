@@ -47,7 +47,8 @@ Please replace the configuration files with your own version.
 First create your www and mysql user with uid (Here is debian example, command may differ based on OS).
 If you already have www and mysql user, you can skip for this step.
 ```bash
-#please if 1001 or 1002 is not available, please replace to other number you like
+#if 1001 or 1002 is not available, please replace to other number you like
+#DONT FORGET to change uid value in docker compose file to your www and mysql user uid 
 useradd www -u 1001
 useradd mysql -u 1002
 ```

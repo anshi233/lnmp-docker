@@ -6,7 +6,7 @@
 
 #IMPORTANT!!!Please Setting the following Values!
 
-Backup_Home="/home/backup"
+Backup_Home="/home/backup/"
 MySQL_Dump="docker exec -it mysql mysqldump"
 ######~Set Directory you want to backup~######
 Backup_Dir=("../wwwroot/vpser.net" "../home/wwwroot/lnmp.org")
