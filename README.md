@@ -82,6 +82,13 @@ docker compose down [nginx | php-fpm | mysql]
 docker compose logs [nginx | php-fpm | mysql]
 ```
 
+## PHP Cron定时服务
+PHP所需的Cron定时服务可用使用宿主机上的Crontab配合```docker exec -t```解决
+格式为
+```
+* *     * * *   root    /usr/bin/docker exec -t php-fpm sh -c 'php /home/www/the/php/file/you/want/to/run.php'
+...
+```
 
 
 # ENGLISH
